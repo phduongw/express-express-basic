@@ -3,10 +3,20 @@ const bodyParser = require('body-parser');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const path = require('path');
+const expressHandlebars = require('express-handlebars');
 
 const app = express();
-app.set('view engine', 'pug');
+// app.set('view engine', 'pug'); pug view
 app.set("views", "views");
+// app.engine('hbs', expressHandlebars({ layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs' })); //handlebars view
+// app.set('view engine', 'hbs');
+/*
+    Noted for handlebars:
+        - File views cần phải có đuôi file giống với tham số thứ nhất trong hàm app.engine
+        - Tham số thứ 2 trong app.set('view engine',...) cần phải giống với tham số thứ nhất trong hàm app.engine
+ */
+
+app.set("view engine", "ejs");
 
 /*
  - Request: Incoming request
@@ -24,13 +34,14 @@ app.use(bodyParser.urlencoded(
         extended: false
     }
 ));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRoutes.router);
 app.use(shopRoutes);
 app.use((req, res, next) => {
     res
         .status(404)
-        .render("page-not-found");
+        .render("404", { pageTitle: "Page Not Found" });
 });
 
 app.listen(3000);

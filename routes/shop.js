@@ -8,7 +8,11 @@ router.get("/", (req, res, next) => {
     // res.sendFile(path.join(__dirname, '../', 'views', 'shop.html')); //Same write();
     res.render('shop', {
         prods: products,
-        docTitle: 'Shop'
+        pageTitle: 'Shop',
+        hasProds: products.length > 0,
+        activeShop: true,
+        productsCSS: true,
+        path: '/'
     });
 });
 

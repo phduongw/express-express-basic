@@ -1,12 +1,12 @@
 extends layouts/main-layout
 block styles
-    link(rel="stylesheet", href="./css/product.css")
-    link(rel="stylesheet", href="./css/form.css")
+    link(rel="stylesheet", href="/css/forms.css")
+    link(rel="stylesheet", href="/css/product.css")
 
 block content
     main
-        form(action="/admin/product" method="POST")
-            .abc
+        form.product-form(action="/admin/product" method="POST")
+            .form-control
                 lable(for="title") Title:
                 input(id="title" type="text" name="title")
-                button(type="submit") Adding this Product
+                button.btn(type="submit") Adding this Product
