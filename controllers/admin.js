@@ -1,6 +1,4 @@
-const Product  = require('../models/product');
-
-
+const Product = require("../models/product");
 
 exports.getAddProduct = (req, res) => {
     // res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html')); //Same write();
@@ -20,15 +18,12 @@ exports.postAddProduct = (req, res) => {
     res.redirect("/");
 }
 
-exports.getAllProducts = (req, res) => {
+exports.getProducts = (req, res) => {
     Product.fetchAll((prods) => {
-        res.render('shop/product-list', {
-            pageTitle: 'Shop',
+        res.render('admin/products', {
+            pageTitle: 'Admin Products',
             prods: prods,
-            hasProds: prods.length > 0,
-            activeShop: true,
-            productsCSS: true,
-            path: '/'
+            path: '/admin/products',
         })
     })
 }
